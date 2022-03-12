@@ -1,4 +1,4 @@
-import { $, OPERATORS, MESSAGE } from "./consts/consts.js";
+import { $, OPERATORS, MESSAGE, MAX_DIGIT_LENGTH } from "./consts/consts.js";
 
 function Calculator() {
   const $digits = $(".digits");
@@ -34,9 +34,9 @@ function Calculator() {
     const operator = displayValue.split("").find((v) => OPERATORS.includes(v));
 
     if (!operator) {
-      return displayValue.length < 3;
+      return displayValue.length < MAX_DIGIT_LENGTH;
     }
-    return displayValue.split(operator)[1].length < 3;
+    return displayValue.split(operator)[1].length < MAX_DIGIT_LENGTH;
   };
 
   const putOperator = (e) => {

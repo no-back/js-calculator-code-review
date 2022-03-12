@@ -1,6 +1,4 @@
-const $ = (selector) => {
-  return document.querySelector(selector);
-};
+import { $, OPERATORS, MESSAGE } from "./consts/consts.js";
 
 function Calculator() {
   const $digits = $(".digits");
@@ -8,7 +6,6 @@ function Calculator() {
   const $equalSign = $("#equal-sign");
   const $modifier = $(".modifier");
   const $total = $("#total");
-  const operators = ["/", "X", "-", "+"];
 
   this.init = () => {
     initEventHandlers();
@@ -23,7 +20,7 @@ function Calculator() {
 
   const putNumber = (e) => {
     if (!isValidLength()) {
-      return alert("숫자는 세 자리까지만 입력 가능합니다!");
+      return alert(MESSAGE.WARN_MAX_NUMBER);
     }
     if ($total.textContent === "0") {
       $total.textContent = e.target.textContent;
@@ -31,9 +28,10 @@ function Calculator() {
     }
     total.textContent += e.target.textContent;
   };
+
   const isValidLength = () => {
     const displayValue = $total.textContent;
-    const operator = displayValue.split("").find((v) => operators.includes(v));
+    const operator = displayValue.split("").find((v) => OPERATORS.includes(v));
 
     if (!operator) {
       return displayValue.length < 3;
@@ -47,7 +45,7 @@ function Calculator() {
     }
 
     if (!isAbleAddOperator()) {
-      alert("숫자를 먼저 입력한 후 연산자를 입력해주세요!");
+      alert(MESSAGE.WARN_SEQUENCE);
       e.preventDefault();
       return;
     }
@@ -66,13 +64,13 @@ function Calculator() {
 
   const putResult = (e) => {
     if (!isAbleAddOperator()) {
-      alert("숫자를 먼저 입력한 후 연산자를 입력해주세요!");
+      alert(MESSAGE.WARN_SEQUENCE);
       e.preventDefault();
       return;
     }
 
     const displayValue = $total.textContent;
-    const operator = displayValue.split("").find((v) => operators.includes(v));
+    const operator = displayValue.split("").find((v) => OPERATORS.includes(v));
     const operands = displayValue.split(operator);
     const operations = {
       "+": (a, b) => Number(a) + Number(b),

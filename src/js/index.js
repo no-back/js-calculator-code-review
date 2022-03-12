@@ -1,4 +1,10 @@
-import { $, OPERATORS, MESSAGE, MAX_DIGIT_LENGTH } from "./consts/consts.js";
+import {
+  $,
+  OPERATORS,
+  operations,
+  MESSAGE,
+  MAX_DIGIT_LENGTH,
+} from "./consts/consts.js";
 
 function Calculator() {
   const $digits = $(".digits");
@@ -32,11 +38,12 @@ function Calculator() {
   const isValidLength = () => {
     const displayValue = $total.textContent;
     const operator = displayValue.split("").find((v) => OPERATORS.includes(v));
+    const operands = displayValue.split(operator);
 
     if (!operator) {
       return displayValue.length < MAX_DIGIT_LENGTH;
     }
-    return displayValue.split(operator)[1].length < MAX_DIGIT_LENGTH;
+    return operands[1].length < MAX_DIGIT_LENGTH;
   };
 
   const putOperator = (e) => {
@@ -72,12 +79,6 @@ function Calculator() {
     const displayValue = $total.textContent;
     const operator = displayValue.split("").find((v) => OPERATORS.includes(v));
     const operands = displayValue.split(operator);
-    const operations = {
-      "+": (a, b) => Number(a) + Number(b),
-      "-": (a, b) => Number(a) - Number(b),
-      X: (a, b) => Number(a) * Number(b),
-      "/": (a, b) => Math.floor(Number(a) / Number(b)),
-    };
     if (operands.length === 1) {
       return;
     }

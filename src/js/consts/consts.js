@@ -1,7 +1,15 @@
 export const $ = (selector) => {
   return document.querySelector(selector);
 };
+
 export const OPERATORS = ["/", "X", "-", "+"];
+
+export const operations = {
+  "+": (a, b) => a + b,
+  "-": (a, b) => a - b,
+  X: (a, b) => a * b,
+  "/": (a, b) => Math.floor(a / b),
+};
 
 export const MESSAGE = {
   WARN_MAX_NUMBER: "숫자는 세 자리까지만 입력 가능합니다!",

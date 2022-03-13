@@ -1,0 +1,23 @@
+{
+  "name": "js-calculator-code-review",
+  "version": "1.0.0",
+  "description": "<br/> <br/>",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "^9.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eunyeol-Lucas/js-calculator-code-review.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eunyeol-Lucas/js-calculator-code-review/issues"
+  },
+  "homepage": "https://github.com/Eunyeol-Lucas/js-calculator-code-review#readme"
+}

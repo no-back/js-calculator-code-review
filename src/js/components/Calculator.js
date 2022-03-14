@@ -83,5 +83,26 @@ export default class Calculator {
     this.defaultState();
   }
 
+  clearDisplay() {
+    this.state = {
+      firstNum: "",
+      secondNum: "",
+    };
+    this.displayElement.textContent = "0";
+    this.defaultState();
+  }
 
+  defaultState() {
+    this.operatorCheck = true;
+    this.modifierCheck = false;
+    this.isLeftNum = false;
+    this.isRightNum = false;
+    this.operator = "";
+  }
+
+  updateDisplay(
+    value = this.state.firstNum + this.operator + this.state.secondNum
+  ) {
+    this.displayElement.textContent = value;
+  }
 }

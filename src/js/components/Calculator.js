@@ -70,4 +70,18 @@ export default class Calculator {
     return true;
   }
 
+  calculate() {
+    this.modifierCheck = true;
+    this.value = operate[OPERATOR[this.operator]](
+      +this.state.firstNum,
+      +this.state.secondNum
+    );
+    console.log(this.value);
+
+    this.updateDisplay(this.value);
+    this.setState({ ...this.state, firstNum: this.value, secondNum: "" });
+    this.defaultState();
+  }
+
+
 }

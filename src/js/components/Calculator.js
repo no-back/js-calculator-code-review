@@ -57,5 +57,17 @@ export default class Calculator {
     this.updateDisplay();
   }
 
+  isValidLength() {
+    if (!this.isLeftNum) {
+      if (this.state.firstNum.length >= "3") {
+        return false;
+      }
+    }
+
+    if (this.state.secondNum.length >= "3") {
+      return false;
+    }
+    return true;
+  }
 
 }

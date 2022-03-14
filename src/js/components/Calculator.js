@@ -1,19 +1,8 @@
 import { MESSAGE } from "../utils/const.js";
 import { OPERATE, OPERATOR } from "../utils/math.js";
+import Components from "./Components.js";
 
-export default class Calculator {
-  constructor(displayElement) {
-    this.state = {
-      firstNumber: "",
-      secondNumber: "",
-    };
-    this.displayElement = displayElement;
-    this.defaultState();
-  }
-
-  setState(nextState) {
-    this.state = nextState;
-  }
+export default class Calculator extends Components {
   putNumber(number) {
     if (!this.isValidLength()) {
       return alert(MESSAGE.LIMITED_NUMBER_WARNING_MESSAGE);
@@ -84,24 +73,7 @@ export default class Calculator {
     this.defaultState();
   }
 
-  clearDisplay() {
-    this.state = {
-      firstNumber: "",
-      secondNumber: "",
-    };
-    this.displayElement.textContent = "0";
-    this.defaultState();
-  }
 
-  defaultState() {
-    this.existFirstNumber = false;
-    this.existSecondNumber = false;
-    this.operator = "";
-  }
 
-  updateDisplay(
-    value = this.state.firstNumber + this.operator + this.state.secondNumber
-  ) {
-    this.displayElement.textContent = value;
-  }
+  
 }

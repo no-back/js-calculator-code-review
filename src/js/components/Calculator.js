@@ -39,4 +39,23 @@ export default class Calculator {
     return;
   }
 
+  putOperator(operator) {
+    if (this.operator && !this.isRightNum) {
+      alert("두 번째 숫자를 입력해 주세요.");
+      return;
+    }
+
+    if (operator === "=") {
+      if (this.isRightNum) return this.calculate();
+      return;
+    }
+    if (this.displayElement.textContent === "0")
+      this.setState({ ...this.state, firstNum: "0" });
+    this.operator = operator;
+    this.isLeftNum = true;
+
+    this.updateDisplay();
+  }
+
+
 }

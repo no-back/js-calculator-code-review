@@ -4,11 +4,14 @@
   "description": "<br/> <br/>",
   "main": "index.js",
   "dependencies": {
-    "cypress": "^9.5.1"
+    "cypress": "^9.5.1",
+    "gh-pages": "^3.2.3"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "cypress open"
+    "test": "cypress open",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -19,5 +22,5 @@
   "bugs": {
     "url": "https://github.com/Eunyeol-Lucas/js-calculator-code-review/issues"
   },
-  "homepage": "https://github.com/Eunyeol-Lucas/js-calculator-code-review#readme"
+  "homepage": "https://github.com/Eunyeol-Lucas/js-calculator-code-review/tree/eunyeol-lucas/"
 }

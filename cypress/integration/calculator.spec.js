@@ -8,8 +8,6 @@
 - [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
 */
 
-const { linkSync } = require("fs");
-
 const OPERATOR_WARNING_MESSAGE = "숫자를 먼저 입력한 후 연산자를 입력해주세요!";
 const LIMITED_NUMBER_WARNING_MESSAGE = "숫자는 세 자리까지만 입력 가능합니다!";
 describe("Calculator Application Test", () => {
@@ -34,7 +32,7 @@ describe("Calculator Application Test", () => {
 
   it("2개의 숫자에 대해 곱셈이 가능하다.", () => {
     cy.get(".digit").contains("3").click();
-    cy.get(".operation").contains("*").click();
+    cy.get(".operation").contains("X").click();
     cy.get(".digit").contains("2").click();
     cy.get(".operation").contains("=").click();
     cy.get("#total").should("have.text", "6");
@@ -58,7 +56,7 @@ describe("Calculator Application Test", () => {
     cy.get(".digit").contains("2").click();
     cy.get(".digit").contains("3").click();
     cy.get(".digit").contains("4").click();
-    cy.get("#total").should("have.text", "123").and("have.length", 3);
+    cy.get("#total").should("have.text", "123");
   });
   it("계산 결과를 표현할 때 소수점 이하는 버림한다.", () => {
     cy.get(".digit").contains("1").click();
@@ -108,7 +106,7 @@ describe("Calculator Alert Test", () => {
     cy.get(".digit").contains("3").click();
     cy.get(".operation").contains("/").click();
     cy.get(".operation")
-      .contains("*")
+      .contains("X")
       .click()
       .then(() => {
         expect(alertStub.getCall(0)).to.be.calledWith(OPERATOR_WARNING_MESSAGE);

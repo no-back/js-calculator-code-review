@@ -1,3 +1,42 @@
-class Calculator {
-  
+import { OPERATORS, MESSAGE, MAXIMUM_DIGITS_LENGTH } from "../utils/const.js";
+import { operate, OPERATOR } from "../utils/math.js";
+
+export default class Calculator {
+  constructor(displayElement) {
+    this.operator = "";
+    this.state = {
+      firstNum: "",
+      secondNum: "",
+    };
+    this.displayElement = displayElement;
+    this.defaultState();
+  }
+
+  setState(nextState) {
+    this.state = nextState;
+  }
+  putNumber(number) {
+    if (!this.isValidLength()) {
+      return alert(MESSAGE.LIMITED_NUMBER_WARNING_MESSAGE);
+    }
+
+    if (this.displayElement.textContent === "0") {
+      if (number === "0") return;
+    }
+    this.operatorCheck = false;
+    if (!this.isLeftNum) {
+      this.setState({ ...this.state, firstNum: this.state.firstNum + number });
+      this.updateDisplay();
+      return;
+    }
+
+    this.setState({
+      ...this.state,
+      secondNum: this.state.secondNum + number,
+    });
+    this.isRightNum = true;
+    this.updateDisplay();
+    return;
+  }
+
 }

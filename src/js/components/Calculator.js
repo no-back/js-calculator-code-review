@@ -1,12 +1,11 @@
-import { OPERATORS, MESSAGE, MAXIMUM_DIGITS_LENGTH } from "../utils/const.js";
-import { operate, OPERATOR } from "../utils/math.js";
+import { MESSAGE } from "../utils/const.js";
+import { OPERATE, OPERATOR } from "../utils/math.js";
 
 export default class Calculator {
   constructor(displayElement) {
-    this.operator = "";
     this.state = {
-      firstNum: "",
-      secondNum: "",
+      firstNumber: "",
+      secondNumber: "",
     };
     this.displayElement = displayElement;
     this.defaultState();
@@ -23,85 +22,85 @@ export default class Calculator {
     if (this.displayElement.textContent === "0") {
       if (number === "0") return;
     }
-    this.operatorCheck = false;
-    if (!this.isLeftNum) {
-      this.setState({ ...this.state, firstNum: this.state.firstNum + number });
+    if (!this.existFirstNumber) {
+      this.setState({
+        ...this.state,
+        firstNumber: this.state.firstNumber + number,
+      });
       this.updateDisplay();
       return;
     }
 
     this.setState({
       ...this.state,
-      secondNum: this.state.secondNum + number,
+      secondNumber: this.state.secondNumber + number,
     });
-    this.isRightNum = true;
+    this.existSecondNumber = true;
     this.updateDisplay();
     return;
   }
 
   putOperator(operator) {
-    if (this.operator && !this.isRightNum) {
-      alert("두 번째 숫자를 입력해 주세요.");
-      return;
+    if (operator === "=") {
+      if (!this.operator) {
+        alert(MESSAGE.OPERATOR_WARNING_MESSAGE);
+        return;
+      }
+      if (!this.existSecondNumber) {
+        alert(MESSAGE.NEED_SECOND_NUMBER_MESSAGE);
+        return;
+      }
+      return this.calculate();
     }
 
-    if (operator === "=") {
-      if (this.isRightNum) return this.calculate();
-      return;
-    }
     if (this.displayElement.textContent === "0")
-      this.setState({ ...this.state, firstNum: "0" });
+      this.setState({ ...this.state, firstNumber: "0" });
     this.operator = operator;
-    this.isLeftNum = true;
+    this.existFirstNumber = true;
 
     this.updateDisplay();
   }
 
   isValidLength() {
-    if (!this.isLeftNum) {
-      if (this.state.firstNum.length >= "3") {
+    if (!this.existFirstNumber) {
+      if (this.state.firstNumber.length >= "3") {
         return false;
       }
     }
 
-    if (this.state.secondNum.length >= "3") {
+    if (this.state.secondNumber.length >= "3") {
       return false;
     }
     return true;
   }
 
   calculate() {
-    this.modifierCheck = true;
-    this.value = operate[OPERATOR[this.operator]](
-      +this.state.firstNum,
-      +this.state.secondNum
+    this.value = OPERATE[OPERATOR[this.operator]](
+      +this.state.firstNumber,
+      +this.state.secondNumber
     );
-    console.log(this.value);
-
     this.updateDisplay(this.value);
-    this.setState({ ...this.state, firstNum: this.value, secondNum: "" });
+    this.setState({ ...this.state, firstNumber: this.value, secondNumber: "" });
     this.defaultState();
   }
 
   clearDisplay() {
     this.state = {
-      firstNum: "",
-      secondNum: "",
+      firstNumber: "",
+      secondNumber: "",
     };
     this.displayElement.textContent = "0";
     this.defaultState();
   }
 
   defaultState() {
-    this.operatorCheck = true;
-    this.modifierCheck = false;
-    this.isLeftNum = false;
-    this.isRightNum = false;
+    this.existFirstNumber = false;
+    this.existSecondNumber = false;
     this.operator = "";
   }
 
   updateDisplay(
-    value = this.state.firstNum + this.operator + this.state.secondNum
+    value = this.state.firstNumber + this.operator + this.state.secondNumber
   ) {
     this.displayElement.textContent = value;
   }

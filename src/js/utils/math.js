@@ -5,7 +5,7 @@ export const OPERATOR = {
   "/": "DIVIDE",
 };
 
-export const operate = {
+export const OPERATE = {
   PLUS(first, second) {
     return first + second;
   },

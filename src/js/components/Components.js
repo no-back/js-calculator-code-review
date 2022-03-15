@@ -11,7 +11,6 @@ export default class Components {
 
   setState(nextState) {
     this.state = nextState;
-    console.log(this.state);
   }
 
   clearDisplay() {
@@ -32,8 +31,6 @@ export default class Components {
   updateDisplay(
     value = this.state.firstNumber + this.operator + this.state.secondNumber
   ) {
-    console.log(this.operator);
-
     this.displayElement.textContent = value;
   }
 }
